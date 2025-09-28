@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Player : MonoBehaviour
 {
     public Rigidbody myPlayer;
-    public float velocidad = 5f;
+    public float velocidad = 10f;
     public float runVelocidad = 10f;
     public bool isRunning = false;
     public float currentSpeed;
