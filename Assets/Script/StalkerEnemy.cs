@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class StalkerEnemy : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class StalkerEnemy : MonoBehaviour
     public float detection;
     public float walkingSpeed = 5.5f;
     public float runningSpeed = 9.0f;
+    public Transform[] patrolAreas;
+    public float finishedPatrol;
+    private int patrols;
     private NavMeshAgent agent;
     private Animator animator;
+
 
     void Start()
     {
@@ -19,11 +24,11 @@ public class StalkerEnemy : MonoBehaviour
 
         if (agent == null || animator == null)
         {
-            Debug.LogError("Faltan los componentes NavMeshAgent o Animator.");
             enabled = false;
         }
 
         playerFound = FindAnyObjectByType<Player>().transform;
+        agent.speed = walkingSpeed;
     }
 
     public void Update()
@@ -53,16 +58,6 @@ public class StalkerEnemy : MonoBehaviour
                 miGo.speed = walkingSpeed;
             }
 
-            /* float playerDistance = Vector3.Distance(transform.position, playerFound.position);
-            if (playerDistance < detection)
-            {
-                miGo.destination = playerFound.position;
-
-            }
-            else if (playerDistance > detection + 3)
-            {
-                miGo.destination = finalDestination.transform.position;
-            } */
         }
     }
 
@@ -70,5 +65,13 @@ public class StalkerEnemy : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(miGo.transform.position, detection);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("YouLoose");
+        }
     }
 }
