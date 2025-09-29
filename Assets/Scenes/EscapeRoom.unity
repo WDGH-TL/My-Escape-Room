@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayer: {fileID: 0}
-  velocidad: 10
+  velocidad: 20
   runVelocidad: 10
   isRunning: 0
   currentSpeed: 0
@@ -1484,6 +1484,8 @@ MonoBehaviour:
   finalDestination: {fileID: 915071369}
   playerFound: {fileID: 109746321}
   detection: 15
+  walkingSpeed: 5.5
+  runningSpeed: 9
 --- !u!195 &2096930632
 NavMeshAgent:
   m_ObjectHideFlags: 0

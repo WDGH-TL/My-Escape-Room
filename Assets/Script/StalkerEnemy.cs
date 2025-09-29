@@ -7,6 +7,8 @@ public class StalkerEnemy : MonoBehaviour
     public GameObject finalDestination;
     public Transform playerFound;
     public float detection;
+    public float walkingSpeed = 5.5f;
+    public float runningSpeed = 9.0f;
     private NavMeshAgent agent;
     private Animator animator;
 
@@ -32,13 +34,35 @@ public class StalkerEnemy : MonoBehaviour
         animator.SetFloat("Speed", speed);
 
         float playerDistance = Vector3.Distance(transform.position, playerFound.position);
+
         if (playerDistance < detection)
         {
             miGo.destination = playerFound.position;
+
+            if (miGo.speed != runningSpeed)
+            {
+                miGo.speed = runningSpeed;
+            }
         }
         else if (playerDistance > detection + 3)
         {
             miGo.destination = finalDestination.transform.position;
+
+            if (miGo.speed != walkingSpeed)
+            {
+                miGo.speed = walkingSpeed;
+            }
+
+            /* float playerDistance = Vector3.Distance(transform.position, playerFound.position);
+            if (playerDistance < detection)
+            {
+                miGo.destination = playerFound.position;
+
+            }
+            else if (playerDistance > detection + 3)
+            {
+                miGo.destination = finalDestination.transform.position;
+            } */
         }
     }
 
