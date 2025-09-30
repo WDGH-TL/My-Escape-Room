@@ -13,11 +13,11 @@ public class StalkerEnemy : MonoBehaviour
     public float distanceDestinies; // Distancia del enemigo y el primer Area
     private int patrols; // Contador
     private Animator animator;
-
+    public AudioSource playerIsFound;
 
     void Start()
     {
-        
+        playerIsFound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
 
         if (miGo == null || animator == null)
@@ -51,6 +51,7 @@ public class StalkerEnemy : MonoBehaviour
             miGo.destination = playerFound.position;
             if (miGo.speed != runningSpeed)
             {
+                playerIsFound.Play();
                 miGo.speed = runningSpeed;
             }
 
@@ -65,6 +66,7 @@ public class StalkerEnemy : MonoBehaviour
 
                 if (miGo.speed != walkingSpeed)
                 {
+                    playerIsFound.Stop();
                     miGo.speed = walkingSpeed;
                 }
             }
