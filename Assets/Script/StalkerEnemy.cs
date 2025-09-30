@@ -5,15 +5,14 @@ using UnityEngine.SceneManagement;
 public class StalkerEnemy : MonoBehaviour
 {
     public NavMeshAgent miGo;
-    public GameObject finalDestination;
-    public Transform playerFound;
-    public float detection;
-    public float walkingSpeed = 5.5f;
-    public float runningSpeed = 9.0f;
-    public Transform[] patrolAreas;
-    public float finishedPatrol;
-    private int patrols;
-    private NavMeshAgent agent;
+    public Transform playerFound; // Player aora es el perseguido
+    public float detection; // Detecta al player
+    public float walkingSpeed = 5.5f; // Caminar Animación
+    public float runningSpeed = 9.0f; // Correr Animación
+    public Transform[] patrolAreas; // Lista de Areas a patrullar
+    public float distanceDestinies; // Distancia del enemigo y el primer Area
+    private int patrols; // Contador
+    private NavMeshAgent agent; // Animación
     private Animator animator;
 
 
@@ -29,35 +28,41 @@ public class StalkerEnemy : MonoBehaviour
 
         playerFound = FindAnyObjectByType<Player>().transform;
         agent.speed = walkingSpeed;
+        distanceDestinies = Vector3.Distance(transform.position, patrolAreas[patrols].position);
+        miGo.destination = patrolAreas[patrols].position;
     }
 
     public void Update()
     {
-        miGo.destination = finalDestination.transform.position;
         Vector3 worldVelocity = agent.velocity;
         float speed = worldVelocity.magnitude;
         animator.SetFloat("Speed", speed);
 
         float playerDistance = Vector3.Distance(transform.position, playerFound.position);
 
-        if (playerDistance < detection)
+        if (distanceDestinies < 2)
+        {
+            //miGo.destination = patrolAreas[patrols].position;
+            miGo.destination = patrolAreas[patrols].position;
+
+        }
+
+        if (playerDistance <= detection)
         {
             miGo.destination = playerFound.position;
 
-            if (miGo.speed != runningSpeed)
-            {
-                miGo.speed = runningSpeed;
-            }
+
         }
         else if (playerDistance > detection + 3)
         {
-            miGo.destination = finalDestination.transform.position;
 
-            if (miGo.speed != walkingSpeed)
+            if (!miGo.pathPending && miGo.remainingDistance < 0.5f)
             {
-                miGo.speed = walkingSpeed;
-            }
+                patrols = (patrols + 1) % patrolAreas.Length;
+                miGo.destination = patrolAreas[patrols].position;
 
+
+            }
         }
     }
 

@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 44464721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: 7.2, z: 6.6}
+  m_LocalPosition: {x: -78, y: -5.8, z: -75.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -649,7 +649,7 @@ Transform:
   m_GameObject: {fileID: 400152094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: 7.2, z: 6.6}
+  m_LocalPosition: {x: -73.5, y: 7.2, z: 6.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -788,7 +788,7 @@ Transform:
   m_GameObject: {fileID: 639386750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: 7.2, z: 6.6}
+  m_LocalPosition: {x: 5.5, y: 7.2, z: -33.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1123,7 +1123,7 @@ Transform:
   m_GameObject: {fileID: 1029339249}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: 7.2, z: 6.6}
+  m_LocalPosition: {x: -10.3, y: -1.9, z: -70.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1742,8 +1742,12 @@ MonoBehaviour:
   detection: 20
   walkingSpeed: 5.5
   runningSpeed: 9
-  patrolAreas: []
-  finishedPatrol: 0
+  patrolAreas:
+  - {fileID: 400152095}
+  - {fileID: 639386751}
+  - {fileID: 1029339250}
+  - {fileID: 44464722}
+  distanceDestinies: 0
 --- !u!195 &2096930632
 NavMeshAgent:
   m_ObjectHideFlags: 0
