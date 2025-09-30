@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 44464721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -78, y: -5.8, z: -75.6}
+  m_LocalPosition: {x: -78, y: -2.29, z: -77.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1154,7 +1154,7 @@ Transform:
   m_GameObject: {fileID: 1076103672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: 7.2, z: 6.6}
+  m_LocalPosition: {x: -82, y: -2.67, z: -75.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1185,7 +1185,7 @@ Transform:
   m_GameObject: {fileID: 1208940965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: 7.2, z: 6.6}
+  m_LocalPosition: {x: -69.2, y: -2.7, z: -44.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1605,7 +1605,7 @@ Transform:
   m_GameObject: {fileID: 1758624923}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: 7.2, z: 6.6}
+  m_LocalPosition: {x: -35.2, y: -2.35, z: -79.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1966,6 +1966,10 @@ MonoBehaviour:
   - {fileID: 639386751}
   - {fileID: 1565642220}
   - {fileID: 1029339250}
+  - {fileID: 44464722}
+  - {fileID: 1758624924}
+  - {fileID: 1076103673}
+  - {fileID: 1208940966}
   distanceDestinies: 0
 --- !u!195 &2096930632
 NavMeshAgent:
