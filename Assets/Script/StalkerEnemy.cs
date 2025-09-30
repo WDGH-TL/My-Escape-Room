@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class StalkerEnemy : MonoBehaviour
 {
     public NavMeshAgent miGo;
-    public Transform playerFound; // Player aora es el perseguido
+    public Transform playerFound; // Player ahora es el perseguido
     public float detection; // Detecta al player
     public float walkingSpeed = 5.5f; // Caminar Animación
     public float runningSpeed = 9.0f; // Correr Animación
