@@ -12,29 +12,28 @@ public class StalkerEnemy : MonoBehaviour
     public Transform[] patrolAreas; // Lista de Areas a patrullar
     public float distanceDestinies; // Distancia del enemigo y el primer Area
     private int patrols; // Contador
-    private NavMeshAgent agent; // Animación
     private Animator animator;
 
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        
         animator = GetComponent<Animator>();
 
-        if (agent == null || animator == null)
+        if (miGo == null || animator == null)
         {
             enabled = false;
         }
 
         playerFound = FindAnyObjectByType<Player>().transform;
-        agent.speed = walkingSpeed;
+        miGo.speed = walkingSpeed;
         distanceDestinies = Vector3.Distance(transform.position, patrolAreas[patrols].position);
         miGo.destination = patrolAreas[patrols].position;
     }
 
     public void Update()
     {
-        Vector3 worldVelocity = agent.velocity;
+        Vector3 worldVelocity = miGo.velocity;
         float speed = worldVelocity.magnitude;
         animator.SetFloat("Speed", speed);
 
@@ -42,7 +41,7 @@ public class StalkerEnemy : MonoBehaviour
 
         if (distanceDestinies < 2)
         {
-            //miGo.destination = patrolAreas[patrols].position;
+           
             miGo.destination = patrolAreas[patrols].position;
 
         }
@@ -50,7 +49,10 @@ public class StalkerEnemy : MonoBehaviour
         if (playerDistance <= detection)
         {
             miGo.destination = playerFound.position;
-
+            if (miGo.speed != runningSpeed)
+            {
+                miGo.speed = runningSpeed;
+            }
 
         }
         else if (playerDistance > detection + 3)
@@ -61,7 +63,10 @@ public class StalkerEnemy : MonoBehaviour
                 patrols = (patrols + 1) % patrolAreas.Length;
                 miGo.destination = patrolAreas[patrols].position;
 
-
+                if (miGo.speed != walkingSpeed)
+                {
+                    miGo.speed = walkingSpeed;
+                }
             }
         }
     }
@@ -76,7 +81,7 @@ public class StalkerEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("YouLoose");
+            //SceneManager.LoadScene("YouLoose");
         }
     }
 }
