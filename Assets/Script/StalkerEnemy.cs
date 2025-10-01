@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -14,9 +15,21 @@ public class StalkerEnemy : MonoBehaviour
     private int patrols; // Contador
     private Animator animator;
     public AudioSource playerIsFound;
+    public float idleTime = 2.0f;
+    public float idleTimer;
+
+    public enum ENEMY_STATE
+    {
+        Idle,
+        Walking,
+        Running
+    }
+    public ENEMY_STATE currentState;
 
     void Start()
     {
+
+        currentState = ENEMY_STATE.Idle;
         playerIsFound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
 
@@ -29,47 +42,78 @@ public class StalkerEnemy : MonoBehaviour
         miGo.speed = walkingSpeed;
         distanceDestinies = Vector3.Distance(transform.position, patrolAreas[patrols].position);
         miGo.destination = patrolAreas[patrols].position;
+        WalkingState();
     }
+
 
     public void Update()
     {
-        Vector3 worldVelocity = miGo.velocity;
-        float speed = worldVelocity.magnitude;
+        float speed = miGo.velocity.magnitude;
         animator.SetFloat("Speed", speed);
-
         float playerDistance = Vector3.Distance(transform.position, playerFound.position);
-
-        if (distanceDestinies < 2)
+        switch (currentState)
         {
-           
-            miGo.destination = patrolAreas[patrols].position;
-
-        }
-
-        if (playerDistance <= detection)
-        {
-            miGo.destination = playerFound.position;
-            if (miGo.speed != runningSpeed)
-            {
-                playerIsFound.Play();
-                miGo.speed = runningSpeed;
-            }
-
-        }
-        else if (playerDistance > detection + 3)
-        {
-
-            if (!miGo.pathPending && miGo.remainingDistance < 0.5f)
-            {
-                patrols = (patrols + 1) % patrolAreas.Length;
-                miGo.destination = patrolAreas[patrols].position;
-
-                if (miGo.speed != walkingSpeed)
+            case ENEMY_STATE.Idle:
+                if(playerDistance <= detection)
                 {
-                    playerIsFound.Stop();
-                    miGo.speed = walkingSpeed;
+                    RunningState();
                 }
-            }
+                idleTimer -= Time.deltaTime;
+                if (idleTimer <= 0)
+                {
+                    patrols = (patrols + 1) % patrolAreas.Length;
+                    WalkingState();
+                }
+                break;
+
+            case ENEMY_STATE.Walking:
+                if(playerDistance <= detection)
+                {
+                    RunningState();
+                }
+                if (!miGo.pathPending && miGo.remainingDistance < 0.5f)
+                {
+                    IdleState();
+                }
+                break;
+
+            case ENEMY_STATE.Running:
+                if(playerDistance >= detection +3)
+                {
+                    WalkingState();
+                }
+                miGo.destination = playerFound.position;
+                break;
+        }
+    }
+    void IdleState()
+    {
+        currentState = ENEMY_STATE.Idle;
+        idleTimer = idleTime;
+        miGo.isStopped = true;
+    }
+
+    void WalkingState()
+    {
+        currentState = ENEMY_STATE.Walking;
+        miGo.isStopped = false;
+        miGo.speed = walkingSpeed;
+        miGo.destination = patrolAreas[patrols].position;
+        if (playerIsFound.isPlaying)
+        {
+            playerIsFound.Stop();
+        }
+    }
+
+    void RunningState()
+    {
+        currentState = ENEMY_STATE.Running;
+        miGo.isStopped = false;
+        miGo.speed = runningSpeed;
+        miGo.destination = patrolAreas[patrols].position;
+        if (!playerIsFound.isPlaying)
+        {
+            playerIsFound.Play();
         }
     }
 
