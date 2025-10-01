@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory Instance;
+    public AudioSource itemIsDropped;
     public ItemTemplate[] itemInventory;
     public InventoryUI[] slots;
 
@@ -13,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
+        itemIsDropped = GetComponent<AudioSource>();
         itemInventory = new ItemTemplate[2];
     }
 
