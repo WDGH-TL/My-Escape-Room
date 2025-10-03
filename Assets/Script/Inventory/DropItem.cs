@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
-    public AudioSource itemIsDropped;
+    public AudioClip hitsound;
+    private AudioSource itemIsDropped;
+    public float minImpactForce = 0.5f;
+
     void Start()
     {
         itemIsDropped = GetComponent<AudioSource>();
     }
 
-    public void OnCollisionEnter(Collision collision) // Prueba para sonido
+    private void OnCollisionEnter(Collision collision) // Prueba para sonido
     {
-        if (collision.gameObject.CompareTag("Player"))
+        float impactForce = collision.relativeVelocity.magnitude;
+
+        if (impactForce < minImpactForce && hitsound != null)
         {
-            itemIsDropped.Play();
+            float volume = Mathf.Clamp01(impactForce / 5f);
         }
     }
 }
