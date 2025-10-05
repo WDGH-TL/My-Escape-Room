@@ -13,7 +13,6 @@ public class DropItem : MonoBehaviour
     {
         if (collision.transform.CompareTag("Floor"))
         {
-            Debug.Log("Ayuda");
             if (itemIsDropped != null && itemIsDropped.clip != null)
             {
                 itemIsDropped.Play();

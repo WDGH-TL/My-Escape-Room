@@ -2,6 +2,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 public class StalkerEnemy : MonoBehaviour
 {
@@ -17,6 +19,10 @@ public class StalkerEnemy : MonoBehaviour
     public AudioSource playerIsFound;
     public float idleTime = 2.0f;
     public float idleTimer;
+
+    AudioSource itemDropHeard;
+    Vector3 itemPosition;
+    bool findSoundSorce;
 
     public enum ENEMY_STATE
     {
@@ -85,6 +91,10 @@ public class StalkerEnemy : MonoBehaviour
                 miGo.destination = playerFound.position;
                 break;
         }
+        if (findSoundSorce == true)
+        {
+            this.transform.position = Vector3.MoveTowards(transform.position, itemPosition, 9 * Time.deltaTime);
+        }
     }
     void IdleState()
     {
@@ -127,7 +137,20 @@ public class StalkerEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("YouLoose");
+            //SceneManager.LoadScene("YouLoose");
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<AudioSource>() != null)
+        {
+            itemDropHeard = other.GetComponent<AudioSource>();
+            if (itemDropHeard.isPlaying)
+            {
+                itemDropHeard = other.GetComponent<AudioSource>();
+                itemPosition = itemDropHeard.transform.position;
+            }
+        }
+    }
+
 }

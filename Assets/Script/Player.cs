@@ -40,53 +40,32 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         enElSuelo = Physics.CheckSphere(haySuelo.position, radioDeSueloListener, suelo);
 
         if (haySuelo && velocity.y < 0)
-
         {
-
             velocity.y = -2f;
-
         }
 
-
-
         movement();
-
         mouseLook();
 
-
-
         if (Physics.Raycast(camara.position, camara.forward, out RaycastHit hit, rayDistance))
-
         {
 
             if (Input.GetKeyDown(KeyCode.E))
-
             {
 
                 if (!grabbedObject)
-
                 {
-
                     if (hit.transform.CompareTag("Item"))
-
                     {
-
                         grabTransform(hit.transform);
-
                     }
-
                 }
-
                 else
-
                 {
-
                     releaseTransform();
-
                 }
 
             }
@@ -100,9 +79,7 @@ public class Player : MonoBehaviour
 
 
     private void grabTransform(Transform transformToGrab)
-
     {
-
         grabbedObject = transformToGrab;
         grabbedObject.SetParent(playerHands);
 
@@ -116,7 +93,6 @@ public class Player : MonoBehaviour
 
 
     private void releaseTransform()
-
     {
         Rigidbody newRgby = grabbedObject.AddComponent<Rigidbody>();
         grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
