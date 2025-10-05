@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class StalkerEnemy : MonoBehaviour
 {
     public NavMeshAgent miGo;
-    public Transform playerFound; // Player ahora es el perseguido
+    public Transform playerFound; // Player ahora es perseguido
     public float detection; // Detecta al player
     public float walkingSpeed = 5.5f; // Caminar Animación
     public float runningSpeed = 9.0f; // Correr Animación
@@ -20,7 +20,7 @@ public class StalkerEnemy : MonoBehaviour
     public float idleTime = 2.0f;
     public float idleTimer;
 
-    AudioSource itemDropHeard;
+    public AudioSource itemDropHeard;
     Vector3 itemPosition;
     bool findSoundSorce;
 
@@ -91,10 +91,6 @@ public class StalkerEnemy : MonoBehaviour
                 miGo.destination = playerFound.position;
                 break;
         }
-        if (findSoundSorce == true)
-        {
-            this.transform.position = Vector3.MoveTowards(transform.position, itemPosition, 9 * Time.deltaTime);
-        }
     }
     void IdleState()
     {
@@ -149,6 +145,7 @@ public class StalkerEnemy : MonoBehaviour
             {
                 itemDropHeard = other.GetComponent<AudioSource>();
                 itemPosition = itemDropHeard.transform.position;
+                miGo.destination = itemPosition;
             }
         }
     }

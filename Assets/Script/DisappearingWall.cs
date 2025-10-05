@@ -1,16 +1,23 @@
 using UnityEngine;
 
+
+
 public class DisappearingWall : MonoBehaviour
 {
+
     public GameObject hint;
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (hint != null)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            hint.SetActive(true);
-            Invoke("HideHint", 2f);
+            if (hint != null)
+            {
+                hint.SetActive(true);
+                Invoke("HideHint", 2f);
+            }
         }
+        Debug.Log(collision.gameObject.name);
     }
 
     void HideHint()
@@ -20,4 +27,5 @@ public class DisappearingWall : MonoBehaviour
             hint.SetActive(false);
         }
     }
+
 }
