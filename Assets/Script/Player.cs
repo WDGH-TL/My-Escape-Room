@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 
     public float rayDistance = 5f;
     private Rigidbody grabbedRgby;
+
+
     void Start()
     {
         myPlayer = GetComponent<Rigidbody>();
@@ -75,8 +77,6 @@ public class Player : MonoBehaviour
         Debug.DrawRay(camara.position, camara.forward * rayDistance, Color.cyan);
 
     }
-
-
 
     private void grabTransform(Transform transformToGrab)
     {

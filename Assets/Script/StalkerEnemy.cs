@@ -137,7 +137,7 @@ public class StalkerEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //SceneManager.LoadScene("YouLoose");
+            SceneManager.LoadScene("YouLoose");
         }
     }
     private void OnTriggerStay(Collider other)
