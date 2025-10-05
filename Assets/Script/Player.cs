@@ -33,11 +33,11 @@ public class Player : MonoBehaviour
     public float rayDistance = 5f;
     private Rigidbody grabbedRgby;
 
+    public GameObject disWall;
 
     void Start()
     {
         myPlayer = GetComponent<Rigidbody>();
-
     }
 
     void Update()
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
                 {
                     if (hit.transform.CompareTag("Item"))
                     {
-                        grabTransform(hit.transform);
+                        grabTransform(hit);
                     }
                 }
                 else
@@ -78,16 +78,29 @@ public class Player : MonoBehaviour
 
     }
 
-    private void grabTransform(Transform transformToGrab)
+    private void grabTransform(RaycastHit grab)
     {
-        grabbedObject = transformToGrab;
-        grabbedObject.SetParent(playerHands);
+        if(grab.transform)
+        {
+            Transform transformToGrab = grab.transform;
+            grabbedObject = transformToGrab;
+            grabbedObject.SetParent(playerHands);
 
-        grabbedRgby = grabbedObject.GetComponent<Rigidbody>();
-        Destroy(grabbedRgby);
+            grabbedRgby = grabbedObject.GetComponent<Rigidbody>();
+            Destroy(grabbedRgby);
 
-        grabbedObject.localPosition = Vector3.zero;
-        grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
+            grabbedObject.localPosition = Vector3.zero;
+            grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        if(grab.collider.gameObject.name == "Grimoire")
+        {
+            if(disWall != null)
+            { 
+                disWall.gameObject.SetActive(false);
+            }
+        }
+
     }
 
 
@@ -99,6 +112,11 @@ public class Player : MonoBehaviour
         grabbedObject.SetParent(null);
         grabbedObject = null;
         newRgby = null;
+
+        if (disWall != null)
+        {
+            disWall.gameObject.SetActive(true);
+        }
     }
 
 
@@ -131,9 +149,7 @@ public class Player : MonoBehaviour
     }
 
     void mouseLook()
-
     {
-
         float moveX = Input.GetAxis("Mouse X");
         float moveY = Input.GetAxis("Mouse Y");
 

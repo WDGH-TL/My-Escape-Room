@@ -417,6 +417,7 @@ MonoBehaviour:
   grabbedObject: {fileID: 1937781910}
   playerHands: {fileID: 633630877}
   rayDistance: 5
+  disWall: {fileID: 382024828}
 --- !u!136 &109746318
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -925,7 +926,7 @@ Transform:
   m_GameObject: {fileID: 382024828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7014532, z: -0, w: 0.7127155}
-  m_LocalPosition: {x: 46.75, y: 15.95, z: 39.63}
+  m_LocalPosition: {x: 47.09, y: 15.95, z: 18.45}
   m_LocalScale: {x: 1, y: 26.729, z: 38.708}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1965,7 +1966,7 @@ GameObject:
   - component: {fileID: 1251959513}
   - component: {fileID: 1251959518}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Grimoire
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2067,7 +2068,7 @@ Transform:
   m_GameObject: {fileID: 1251959512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.83, y: 1.56, z: 26.82}
+  m_LocalPosition: {x: 15.83, y: 1.7, z: 26.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2984,7 +2985,7 @@ Transform:
   m_GameObject: {fileID: 1937781904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.389999, y: 1.49, z: 31.17}
+  m_LocalPosition: {x: 14.389999, y: 1.61, z: 31.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
