@@ -3,16 +3,20 @@ using UnityEngine;
 public class DropItem : MonoBehaviour
 {
     public AudioSource itemIsDropped;
+
     void Start()
     {
         itemIsDropped = GetComponent<AudioSource>();
     }
 
-    public void OnCollisionEnter(Collision collision) // Prueba para sonido
+    public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.transform.CompareTag("Floor"))
         {
-            itemIsDropped.Play();
+            if (itemIsDropped != null && itemIsDropped.clip != null)
+            {
+                itemIsDropped.Play();
+            }
         }
     }
 }

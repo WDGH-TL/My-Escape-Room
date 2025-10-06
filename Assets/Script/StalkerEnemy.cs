@@ -2,11 +2,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 public class StalkerEnemy : MonoBehaviour
 {
     public NavMeshAgent miGo;
-    public Transform playerFound; // Player ahora es el perseguido
+    public Transform playerFound; // Player ahora es perseguido
     public float detection; // Detecta al player
     public float walkingSpeed = 5.5f; // Caminar Animación
     public float runningSpeed = 9.0f; // Correr Animación
@@ -17,6 +19,10 @@ public class StalkerEnemy : MonoBehaviour
     public AudioSource playerIsFound;
     public float idleTime = 2.0f;
     public float idleTimer;
+
+    public AudioSource itemDropHeard;
+    Vector3 itemPosition;
+    bool findSoundSorce;
 
     public enum ENEMY_STATE
     {
@@ -54,7 +60,7 @@ public class StalkerEnemy : MonoBehaviour
         switch (currentState)
         {
             case ENEMY_STATE.Idle:
-                if(playerDistance <= detection)
+                if (playerDistance <= detection)
                 {
                     RunningState();
                 }
@@ -67,7 +73,7 @@ public class StalkerEnemy : MonoBehaviour
                 break;
 
             case ENEMY_STATE.Walking:
-                if(playerDistance <= detection)
+                if (playerDistance <= detection)
                 {
                     RunningState();
                 }
@@ -78,7 +84,7 @@ public class StalkerEnemy : MonoBehaviour
                 break;
 
             case ENEMY_STATE.Running:
-                if(playerDistance >= detection +3)
+                if (playerDistance >= detection + 3)
                 {
                     WalkingState();
                 }
@@ -130,4 +136,18 @@ public class StalkerEnemy : MonoBehaviour
             SceneManager.LoadScene("YouLoose");
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<AudioSource>() != null)
+        {
+            itemDropHeard = other.GetComponent<AudioSource>();
+            if (itemDropHeard.isPlaying)
+            {
+                itemDropHeard = other.GetComponent<AudioSource>();
+                itemPosition = itemDropHeard.transform.position;
+                miGo.destination = itemPosition;
+            }
+        }
+    }
+
 }
