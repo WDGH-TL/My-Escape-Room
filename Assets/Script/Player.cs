@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 
     public GameObject disWall;
 
+    public PlayerInventory inventario;
+
     void Start()
     {
         myPlayer = GetComponent<Rigidbody>();
@@ -76,6 +78,7 @@ public class Player : MonoBehaviour
 
         Debug.DrawRay(camara.position, camara.forward * rayDistance, Color.cyan);
 
+
     }
 
     private void grabTransform(RaycastHit grab)
@@ -91,6 +94,7 @@ public class Player : MonoBehaviour
 
             grabbedObject.localPosition = Vector3.zero;
             grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
+            Destroy(grabbedRgby);
         }
 
         if (grab.collider.gameObject.name == "Grimoire")
@@ -118,6 +122,7 @@ public class Player : MonoBehaviour
             disWall.gameObject.SetActive(true);
         }
     }
+
 
 
 

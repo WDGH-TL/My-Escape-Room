@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
     public ItemTemplate[] itemInventory;
     public InventoryUI[] slots;
 
+
     private void Awake()
     {
         Instance = this;
@@ -37,4 +38,5 @@ public class PlayerInventory : MonoBehaviour
             }
         }
     }
+   
 }
