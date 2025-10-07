@@ -8,10 +8,8 @@ public class Door : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        Transform handsTransform = collision.transform.Find("Hands");
-        if (handsTransform != null)
+        if (inventar != null)
         {
-            Transform keyTransform = handsTransform.Find("Key");
             if (inventar.findItemInInventory("Llave"))
             {
                 Destroy(this.gameObject);

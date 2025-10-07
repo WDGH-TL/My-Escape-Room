@@ -8,9 +8,9 @@ public class AxeDoor : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         Transform handsTransform = collision.transform.Find("Hands");
-        if (handsTransform != null)
+        if (inventar != null)
         {
-            Transform keyTransform = handsTransform.Find("Axe");
+            
             if (inventar.findItemInInventory("Hacha"))
             {
                 Destroy(this.gameObject);
