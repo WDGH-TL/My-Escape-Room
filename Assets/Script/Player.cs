@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
                 {
                     if (hit.transform.CompareTag("Item"))
                     {
+                        inventario.AddItem(hit.transform);
                         grabTransform(hit);
                     }
                 }

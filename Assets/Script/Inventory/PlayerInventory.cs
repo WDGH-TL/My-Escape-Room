@@ -17,12 +17,32 @@ public class PlayerInventory : MonoBehaviour
         itemInventory = new ItemTemplate[2];
     }
 
-    private void OnTriggerEnter(Collider other)
+   /* private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<Items>())
         {
             AddItemToInventory(other.GetComponent<Items>());
         }
+    }*/
+
+    public void AddItem(Transform other)
+    {
+
+        if (other.GetComponent<Items>())
+        {
+            AddItemToInventory(other.GetComponent<Items>());
+        }
+    }
+    public bool findItemInInventory(string nameItem)
+    {
+        for (int i = 0; i < itemInventory.Length; i++)
+        {
+            if (itemInventory[i].itemName == nameItem)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void AddItemToInventory(Items itemToAdd)

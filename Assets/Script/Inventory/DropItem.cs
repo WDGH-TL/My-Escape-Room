@@ -11,7 +11,7 @@ public class DropItem : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Floor"))
+        if (collision.transform.CompareTag("Player"))
         {
             if (itemIsDropped != null && itemIsDropped.clip != null)
             {

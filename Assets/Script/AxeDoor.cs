@@ -3,6 +3,7 @@ using UnityEngine;
 public class AxeDoor : MonoBehaviour
 {
     public GameObject hint;
+    public PlayerInventory inventar;
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -10,7 +11,7 @@ public class AxeDoor : MonoBehaviour
         if (handsTransform != null)
         {
             Transform keyTransform = handsTransform.Find("Axe");
-            if (keyTransform != null)
+            if (inventar.findItemInInventory("Hacha"))
             {
                 Destroy(this.gameObject);
             }

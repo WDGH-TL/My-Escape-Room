@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     public GameObject hint;
-
+    public PlayerInventory inventar;
 
 
     public void OnCollisionEnter(Collision collision)
@@ -12,7 +12,7 @@ public class Door : MonoBehaviour
         if (handsTransform != null)
         {
             Transform keyTransform = handsTransform.Find("Key");
-            if (keyTransform != null)
+            if (inventar.findItemInInventory("Llave"))
             {
                 Destroy(this.gameObject);
                 SceneManager.LoadScene("YouWin");
